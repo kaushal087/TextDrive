@@ -102,3 +102,4 @@ ENV/
 
 .idea
 TextDrive/env.py
+TextDrive/client_secret.json
