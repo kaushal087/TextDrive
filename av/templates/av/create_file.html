@@ -1,55 +1,32 @@
 {% extends "av/base.html" %}
 
 {% block content %}
-    <style>
-body {font-family: Arial, Helvetica, sans-serif;}
-
-input[type=text], select, textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 6px;
-    margin-bottom: 16px;
-    resize: vertical;
-}
-
-input[type=submit] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type=submit]:hover {
-    background-color: #45a049;
-}
-
-.container {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-}
-</style>
-</head>
 <body>
 
-    <h3>Editor</h3><h6>Notes will automatically be saved in every 30 seconds</h6>
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2>Create new Note</h2>
+                <form action="{% url 'create_file' %}" method="post">
+                    {% csrf_token %}
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>Note Title</label>
+                            <input class="form-control" placeholder="Note title"
+                                   type="text" id="file_name" name="file_name"
+                                   value="{{ file_data.name }}">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div id="success"></div>
+                    <div class="form-group">
+                        <input type="submit" value="Submit"
+                               class="btn btn-primary btn-xl">
+                    </div>
 
-    <div class="container">
-
-  <form action="{% url 'create_file' %}" method="post">
-    {% csrf_token %}
-      <label for="fname">File Name</label>
-    <input type="text" id="file_name" name="file_name" placeholder="file_name" value="{{ file_data.name }}">
-
-{#    <textarea id="subject" name="content" placeholder="Write something.." style="height:200px">{{ file_data.content }}</textarea>#}
-
-    <input type="submit" value="Submit">
-  </form>
-</div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 {% endblock content %}
