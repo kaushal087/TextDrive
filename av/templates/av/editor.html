@@ -1,0 +1,55 @@
+{% extends "av/base.html" %}
+
+{% block content %}
+    <style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+</style>
+</head>
+<body>
+
+    <h3>Editor</h3><h6>Notes will automatically be saved in every 30 seconds</h6>
+
+    <div class="container">
+
+  <form action="{% if file_id %}{% url 'update_file' file_id=file_id %}{% else %}{% url 'create_file' %}{% endif %}" method="post">
+    {% csrf_token %}
+      <label for="fname">File Name</label>
+    <input type="text" id="file_name" name="file_name" placeholder="file_name" value="{{ file_data.name }}">
+
+    <textarea id="subject" name="content" placeholder="Write something.." style="height:200px">{{ file_data.content }}</textarea>
+
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+{% endblock content %}

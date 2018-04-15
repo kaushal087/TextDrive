@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'google_auth',
+    'av'
 ]
 
 MIDDLEWARE = [
@@ -129,21 +130,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'index'
 
-from TextDrive.env import GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET
+from TextDrive.env import GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, credentials_dict
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =GOOGLE_CLIENT_ID
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = GOOGLE_CLIENT_SECRET
 
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE =[
-                                'https://www.googleapis.com/auth/drive.appfolder',
-                                'https://www.googleapis.com/auth/drive'
-                                # 'https://mail.google.com/',
-                                # 'https://www.googleapis.com/auth/admin.directory.user.readonly',
-                                # 'https://www.googleapis.com/auth/admin.directory.orgunit.readonly',
-                                # 'https://www.googleapis.com/auth/admin.directory.group.readonly',
-                                # 'https://www.googleapis.com/auth/userinfo.email',
-                                # 'https://www.googleapis.com/auth/userinfo.profile',
-                                ]
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE =['https://www.googleapis.com/auth/drive']
+CREDENTIALS_DICT = credentials_dict

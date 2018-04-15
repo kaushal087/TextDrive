@@ -1,0 +1,10 @@
+{% extends "av/base.html" %}
+
+{% block content %}
+    <h2>List</h2>
+    {% for file in files %}
+        <a class="lead" href="{% url 'editor_file' file_id=file.file_id %}">{{ file.name }}</a><br/>
+
+    {% endfor %}
+{% endblock content %}
+
