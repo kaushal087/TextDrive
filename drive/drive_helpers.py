@@ -86,7 +86,7 @@ class DriveHelper(object):
         return "temp/" + str(uuid.uuid4().hex) + ".txt"
 
     def _create_temp_file(self, data):
-        content = data.get('content')
+        content = data.get('content', "")
         temp_file_name = self._get_random_string()
         base_dir = os.path.dirname(__file__)
         temp_file_fullpath = os.path.join(base_dir, temp_file_name)

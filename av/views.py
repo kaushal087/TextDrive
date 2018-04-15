@@ -40,6 +40,24 @@ def save(request, file_id=None):
     else:
         return HttpResponse(status=404)
 
+def create(request):
+    if request.method == 'GET':
+        template = loader.get_template('av/create_file.html')
+        drive_helper = DriveHelper(request=request)
+        context = drive_helper.get_list()
+        return HttpResponse(template.render(context, request))
+
+    if request.method == "POST":
+        data = {}
+        data['file_name'] = request.POST.get("file_name", "Untitled.txt")
+        data['content'] = " "
+        drive_helper = DriveHelper(request=request)
+        drive_helper.create_file(data=data)
+        return redirect('/list/')
+    else:
+        return HttpResponse(status=404)
+
+
 def logout_user(request):
     logout(request)
     return redirect('/')
