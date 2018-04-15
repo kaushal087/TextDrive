@@ -29,7 +29,7 @@ class DriveHelper(object):
 
         self.service = build('drive', 'v3', http=creds.authorize(Http()))
 
-
+    # Create a folder av_notes
     def _create_folder(self):
         file_metadata = {
             'name': 'av_notes',
@@ -44,6 +44,7 @@ class DriveHelper(object):
         Folder.objects.create(folder_id=file_id, user_id=user_id)
 
 
+    # Get list of file inside av_notes
     def get_list(self):
         files = []
         data = {}
@@ -72,7 +73,7 @@ class DriveHelper(object):
         data['files'] = files
         return data
 
-
+    # Read file content
     def get_file_content(self, file_id):
         try:
             file_data = self.service.files().get(fileId=file_id).execute()
@@ -85,6 +86,7 @@ class DriveHelper(object):
     def _get_random_string(self):
         return "temp/" + str(uuid.uuid4().hex) + ".txt"
 
+    # Create temporary file to be saved to drive
     def _create_temp_file(self, data):
         content = data.get('content')
         temp_file_name = self._get_random_string()
@@ -95,13 +97,14 @@ class DriveHelper(object):
         f.close()
         return temp_file_fullpath
 
+    # delete temporary file
     def _delete_temp_file(self, file_path):
         try:
             os.remove(file_path)
         except OSError:
             pass
 
-
+    # Update file
     def update_file(self, file_id, data):
         file_name = data.get('file_name', 'Untitled.txt')
 
@@ -121,7 +124,7 @@ class DriveHelper(object):
         self._delete_temp_file(file_path)
         return file
 
-
+    # Create new file on drive
     def create_file(self, data):
         file_name = data.get('file_name', 'Untitled.txt')
         file_path = self._create_temp_file(data)
@@ -139,10 +142,3 @@ class DriveHelper(object):
                                             fields='id').execute()
         self._delete_temp_file(file_path)
         return file
-
-
-    def update_or_create_file(self, file_id=None, data=None):
-        if(file_id):
-            self.update_file(file_id=file_id, data=data)
-        else:
-            self.create_file(data=data)
