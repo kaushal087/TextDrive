@@ -15,12 +15,14 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+from TextDrive.env import GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, credentials_dict, secret_key
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '3h1h!cmp&9yv90##67iawgihsj)y$gf3#vs2a92y0wyug##z3='
+SECRET_KEY = secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -131,7 +133,6 @@ STATIC_URL = '/static/'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'index'
 
-from TextDrive.env import GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, credentials_dict
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =GOOGLE_CLIENT_ID
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = GOOGLE_CLIENT_SECRET
