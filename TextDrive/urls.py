@@ -24,3 +24,8 @@ urlpatterns = [
     path('auth/', include('social_django.urls', namespace='social')),
     path('', include('av.urls'))
 ]
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

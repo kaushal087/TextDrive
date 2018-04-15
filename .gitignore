@@ -106,3 +106,4 @@ TextDrive/client_secret.json
 db.sqlite3
 drive/temp/*.txt
 drive/.DS_Store
+static_cdn/
