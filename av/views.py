@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from drive.drive_helpers import DriveHelper
 from django.contrib.auth import logout
 
-# Create your views here.
+
 def index(request):
     template = loader.get_template('av/home.html')
     context = {}
@@ -36,8 +36,6 @@ def save(request, file_id=None):
         data['file_name'] = request.POST.get("file_name", "Untitled.txt")
         drive_helper = DriveHelper(request=request)
         drive_helper.update_or_create_file(file_id=file_id, data=data)
-
-        #TODO save notes
         return redirect('/list/')
     else:
         return HttpResponse(status=404)

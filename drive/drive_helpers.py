@@ -74,15 +74,6 @@ class DriveHelper(object):
 
 
     def get_file_content(self, file_id):
-        """Print a file's content.
-
-        Args:
-          service: Drive API service instance.
-          file_id: ID of the file.
-
-        Returns:
-          File's content if successful, None otherwise.
-        """
         try:
             file_data = self.service.files().get(fileId=file_id).execute()
             content = self.service.files().get_media(fileId=file_id).execute()
